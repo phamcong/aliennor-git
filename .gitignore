@@ -1,0 +1,52 @@
+############
+# FRONTEND #
+############
+
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+aliennor-frontend/dist
+aliennor-frontend/tmp
+aliennor-frontend/out-tsc
+
+# dependencies
+aliennor-frontend/node_modules/*
+
+# IDEs and editors
+aliennor-frontend/.idea
+aliennor-frontend/.project
+aliennor-frontend/.classpath
+aliennor-frontend/.c9/
+aliennor-frontend/*.launch
+aliennor-frontend/.settings/
+aliennor-frontend/*.sublime-workspace
+
+# IDE - VSCode
+aliennor-frontend/.vscode/*
+aliennor-frontend/!.vscode/settings.json
+aliennor-frontend/!.vscode/tasks.json
+aliennor-frontend/!.vscode/launch.json
+aliennor-frontend/!.vscode/extensions.json
+
+# misc
+aliennor-frontend/.sass-cache
+aliennor-frontend/connect.lock
+aliennor-frontend/coverage
+aliennor-frontend/libpeerconnection.log
+aliennor-frontend/npm-debug.log
+aliennor-frontend/testem.log
+aliennor-frontend/typings
+
+# e2e
+aliennor-frontend/e2e/*.js
+aliennor-frontend/e2e/*.map
+
+# System Files
+aliennor-frontend/.DS_Store
+aliennor-frontend/Thumbs.db
+
+################################################
+# BACKEND #
+################################################
+aliennor-backend/env/*
+aliennor-backend/.vscode
