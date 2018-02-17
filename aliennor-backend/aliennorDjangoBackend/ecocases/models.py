@@ -107,7 +107,7 @@ class EcocaseRating(models.Model):
     # def vote_point_options(self):
     #     return vote_point_options
 
-class Association(models.Model):
+class Ecocase2ESM(models.Model):
     ecocase = models.ForeignKey(Ecocase, on_delete=models.CASCADE)
     esm = models.ForeignKey(ESM, on_delete=models.CASCADE)
     weight = models.IntegerField(default=0)
@@ -115,19 +115,19 @@ class Association(models.Model):
     def __str__(self):
         return self.ecocase.title + ' - ' + self.esm.title
 
-class Evaluation(models.Model):
-    association = models.ForeignKey(Association, on_delete=models.CASCADE)
+class ESMEvaluation(models.Model):
+    ecocase2esm = models.ForeignKey(Ecocase2ESM, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, null=True, blank=True, on_delete=models.CASCADE)
     answer = tinymce_models.HTMLField(default='')
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
 
     def clean(self):
-        association = self.association
+        ecocase2esm = self.ecocase2esm
         question = self.question
 
         # validate piece 
-        if question.esm.title != association.esm.title:
-            raise ValidationError({'question': _("Selected question is not belong to the association's esm.")})
+        if question.esm.title != ecocase2esm.esm.title:
+            raise ValidationError({'question': _("Selected question is not belong to the ecocase2esm's esm.")})
             # if you detect errors in multiple fields during Model.clean(), you can also pass a dictionary mapping field names to errors:
             # raise ValidationError({
             #     'title': ValidationError(_('Missing title.'), code='required'),
@@ -135,4 +135,4 @@ class Evaluation(models.Model):
             # })
 
     def __str__(self):
-        return self.association.ecocase.title + ' - ' + self.association.esm.title + ': ' + self.question.title + ' _by_ ' + self.user.username
+        return self.ecocase2esm.ecocase.title + ' - ' + self.ecocase2esm.esm.title + ': ' + self.question.title + ' _by_ ' + self.user.username

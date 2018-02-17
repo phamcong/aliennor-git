@@ -9,7 +9,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.urls import reverse
 
 from ..forms import EcocaseForm
-from ..models import Ecocase, EcocaseRating, ESM, Association, Category, EcocaseComment, EcocaseImage, Level
+from ..models import Ecocase, EcocaseRating, ESM, Ecocase2ESM, Category, EcocaseComment, EcocaseImage, Level
 from django.contrib.auth.models import User
 from ..serializers import UserSerializer, EcocaseSerializer, EcocaseCommentSerializer
 from ..mixins import FormUserNeededMixin, UserOwnerMixin
@@ -99,21 +99,21 @@ def get_ecocases(request):
         selected_esms = [esm for esm in esms if esm != '']
         selected_categories = [ctg for ctg in categories if ctg != '']
 
-        all_associations = Association.objects.filter(
+        all_ecocase2esms = Ecocase2ESM.objects.filter(
             Q(esm__title__in=selected_esms),
             Q(ecocase__category__title__in=selected_categories)
         )
 
-        print('all_associations filtered on categories: ', all_associations)
+        print('all_ecocase2esms filtered on categories: ', all_ecocase2esms)
 
-        for assocication in all_associations:
-            ecocase = Ecocase.objects.get(id=association.ecocase.id)
+        for ecocase2esm in all_ecocase2esms:
+            ecocase = Ecocase.objects.get(id=ecocase2esm.ecocase.id)
             ecocase_dict = model_to_dict(ecocase)
             ecocase_dict['levels'] = [item['title'] for item in ecocase.levels.values()]
             ecocase_dict['categories'] = [item['title'] for item in ecocase.categories.values()]
             ecocase_dict['associated_esms'] = [item['title'] for item in ecocase.associated_esms.values()]
             ecocase_dict['image_urls'] = ecocase.image_urls()
-            ecocases[assoication.ecocase.id] = ecocase_dict
+            ecocases[ecocase2esm.ecocase.id] = ecocase_dict
         
     else:
         all_ecocases = Ecocase.objects.all()
