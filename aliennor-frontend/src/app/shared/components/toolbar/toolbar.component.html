@@ -1,0 +1,65 @@
+<!--<div fxLayout="row">
+  <div fxFlex="100">
+    <mat-toolbar color="primary">
+      <a routerLink="/">
+        <span fxHide fxShow.gt-sm>Angular2 Django | Movies</span>
+        <span fxShow fxHide.gt-sm><i class="fa fa-home" aria-hidden="true"></i></span>
+      </a>
+      <span class="menu-space-filler"></span>
+      <span *ngIf="us.user$ | async; else notAuth">
+        Hello <button [matMenuTriggerFor]="menu">{{ (us.user$ | async).username }} <i class="fa fa-caret-down" aria-hidden="true"></i></button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="goToEditProfile()">
+            <mat-icon><i class="fa fa-pencil-square-o" aria-hidden="true"></i></mat-icon>
+            <span>Update profile</span>
+          </button>
+          <button mat-menu-item (click)="logout($event)">
+            <mat-icon><i class="fa fa-sign-out" aria-hidden="true"></i></mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+      </span>
+      <ng-template #notAuth>
+        <a routerLink="user/register/" class="auth-link">Register</a>
+        <a routerLink="user/login/" class="auth-link">Login</a>
+      </ng-template>
+      <a href="https://github.com/damnko/angular2-django-movies">
+        <i class="fa fa-2x fa-github" aria-hidden="true"></i>
+      </a>
+    </mat-toolbar>
+  </div>
+</div>-->
+
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-button routerLink="welcome">ALIENNOR</button>
+    <button mat-button routerLink="ecocases">Ecocases</button>
+    <button mat-button routerLink="mechanisms">Mechanisms</button>
+
+    <span class="menu-space-filler"></span>
+
+    <span *ngIf="us.user$ | async; else notAuth">
+      Hello
+      <button mat-button [matMenuTriggerFor]="menuRef">
+        {{(us.user$ | async).username }}
+        <i class="fa fa-caret-down" aria-hidden="true"></i>
+      </button>
+
+      <mat-menu #menuRef="matMenu">
+        <button mat-menu-item (click)="goToEditProfile()">
+          <mat-icon><i class="fa fa-pencil-square-o" aria-hidden="true"></i></mat-icon>
+          Update profile
+        </button>
+        <button mat-menu-item (click)="logout($event)">
+          <mat-icon><i class="fa fa-sign-out" aria-hidden="true"></i></mat-icon>
+          Logout
+        </button>
+      </mat-menu>
+    </span>
+
+    <ng-template #notAuth>
+      <button mat-button routerLink="/user/register">Register</button>
+      <button mat-button routerLink="/user/login">Login</button>
+    </ng-template>
+  </mat-toolbar-row>
+</mat-toolbar>

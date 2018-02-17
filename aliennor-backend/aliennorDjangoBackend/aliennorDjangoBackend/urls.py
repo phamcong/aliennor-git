@@ -20,11 +20,19 @@ from rest_framework.routers import DefaultRouter
 from ecocases import views
 
 router = DefaultRouter()
-router.register(r'ecocases', views.EcocaseViewSet, base_name='api_ecocase')
+router.register(r'ecocases', views.get_ecocases, base_name='api_ecocase')
 router.register(r'comments', views.EcocaseCommentViewSet, base_name='api_ecocase_comment')
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^ecocases/', include('ecocases.urls')),
-    url(r'^api/', include(router.urls)),
+    url(r'^api/ecocases/', include('ecocases.urls', namespace='ecocases')),
+    url(r'^api/auth/csrf$', views.send_csrf, name='send csrf token'),
+    url(r'^api/auth/login/$', views.login, name='login'),
+    url(r'^api/auth/register/$', views.register, name='register'),
+    url(r'^api/auth/username-exists/$', views.username_exists, name='check unique username'),
+    url(r'^api/user/get-data/$', views.get_user_data, name='get user data'),
+    url(r'^api/user/update/$', views.update_data, name='update user data'),
+    url(r'^api/user/update-password/$', views.update_password, name='update user password'),
+    url(r'^api/user/delete/$', views.delete_account, name='delete user account')
 ]

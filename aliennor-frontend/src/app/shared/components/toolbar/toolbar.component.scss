@@ -1,0 +1,67 @@
+@import '../../../../scss/variables.scss';
+
+.menu-space-filler {
+  flex: 1 1 auto;
+}
+
+/*.mat-toolbar {
+  background-color: map-get($colors, dark-);
+
+  a {
+    text-decoration: none;
+    color: map-get($colors, text-on-dark);
+    cursor: pointer;
+
+    &.auth-link {
+      border: 2px solid map-get($colors, light-tint);
+      border-radius: 5px;
+      padding: .5em;
+      margin-right: 1em;
+      font-size: .8em;
+
+      &:hover {
+        background-color: map-get($colors, light-tint);
+      }
+    }
+  }
+}*/
+
+.site-nav-span {
+  margin-left: 5px;
+}
+
+#logo {
+  vertical-align:middle;
+  height: 20px;
+}
+
+
+@mixin md-icon-size($size: 24px) {
+  font-size: $size;
+  height: $size;
+  width: $size;
+}
+
+.mat-icon {
+  @include md-icon-size(20px);
+  margin-right: -2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.valign-center {
+ display: inline-flex;
+ align-items: center;
+ justify-content: center;
+ vertical-align: middle;
+}
+
+.navbar-item {
+  margin-right: 20px;
+}
+
+.mat-toolbar {
+  margin-bottom: 50px;
+}

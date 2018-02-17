@@ -1,0 +1,41 @@
+<div class="detailBox">
+  <div class="titleBox">
+    <label>Comment Box</label>
+    <button type="button" class="close" aria-hidden="true">&times;</button>
+  </div>
+  <div class="actionBox">
+    <ul class="commentList">
+      <li *ngFor="let comment of commentsData?.comments | paginate: {
+            itemsPerPage: commentsData?.itemsPerPage,
+            currentPage: commentsData?.currentPage,
+            totalItems: commentsData?.itemsPerPage * commentsData?.totalPages
+          }">
+        <div class="commenterImage">
+          <img src="../../../../assets/images/user-icon.png" />
+        </div>
+        <div class="commentText">
+          <span>{{ comment.username }}</span>
+          <p class="">{{comment.body}}</p>
+          <span class="date sub-text">{{ comment.date | date:'medium' }}</span>
+          <span *ngIf="comment.username == currentUser" (click)="removeComment(comment.id)" class="remove-comment">
+            <i class="fa fa-times-circle-o" aria-hidden="true" title="Remove comment"></i>
+          </span>
+        </div>
+      </li>
+    </ul>
+    <form fxFlexLayout="row" fxLayoutAlign="center" novalidate
+          [formGroup]="commentForm">
+      <div [fxFlex]="width*0.8" class="content">
+        <mat-form-field class="fw">
+            <textarea matInput formControlName="comment"
+                      [placeholder]="(us.user$ | async) ? 'Post comment (as '+(us.user$ | async).username + ')' : 'Post comment (as guest)'"></textarea>
+        </mat-form-field>
+      </div>
+      <div [fxFlex]="width*0.2" class="content">
+        <button mat-mini-fab (click)="postComent()" [disabled]="!commentForm.valid || postingComment">
+          <i class="fa fa-paper-plane" aria-hidden="true"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

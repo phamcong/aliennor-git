@@ -1,0 +1,8 @@
+<div class="container">
+  <h4>Ecocase Creation Form</h4>
+  <form [formGroup]="ecocasePostForm">
+    <label>Title</label>
+    <input formControlName="title" type="text" class="form-control" id="title" required>
+    <button type="submit" (click)="postEcocase()" [disabled]="!ecocasePostForm.valid" class="btn btn-default">Create</button>
+  </form>
+</div>

@@ -1,0 +1,163 @@
+<!-- Display ecocase$ by id -->
+<br>
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading text-center"><h4>{{ (ecocase$ | async).title }}</h4></div>
+    <div class="panel-body">
+      <div class="row top-buffer">
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">Visualization</div>
+            <div class="panel-body">
+              <div class="list-inline">
+                <div *ngFor="let image_url of (ecocase$ | async).image_urls" class="center-block">																								
+                  <img src="{{ image_url }}" class='inline-image' alt="">
+                </div>	
+                <!-- <ul class="list-inline">
+                  <div *ngFor="let image_url of (ecocase$ | async).image_urls">
+                    <div class="cover-item">																								
+                      <li><img src="{{ image_url }}" class="center-block" alt=""></li>
+                    </div>	               
+                  </div>                  
+                </ul> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8 characters-area">
+          <div class="panel panel-default">
+            <div class="panel-heading">Promise</div>
+            <div class="panel-body">                
+              {{ (ecocase$ | async).promise }}
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">Description</div>
+            <div class="panel-body">
+                {{ (ecocase$ | async).description }}
+            </div>
+          </div>
+        </div>
+        <!-- <div class="col-md-8 characters-area">
+          <div class="panel panel-default">
+            <div class="panel-heading">Promise</div>
+            <div class="panel-body">
+                Organisation d’une micro-filière locale et solidaire de bois de chauffage permettant de financer une amélioration de  la gestion forestière.
+              {{ (ecocase$ | async).promise }}
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">Usage</div>
+            <div class="panel-body">
+              Collectif de consommateurs qui s'organise pour travailler en lien avec des acteurs forestiers avec un cahier de charges précis: les acteurs forestiers s'engagent sur une exploitation durable du massif forestier et les consommateurs sur un achat pérenne de bois. Le consommateur de bois bûche s’engage à l’avance et paie une partie de son bois au moment de l’exécution des travaux forestiers. Il peut participer au projet via des chantiers collectifs en forêt pour acquérir des savoir-faire et bénéficier de tarifs plus avantageux.
+              {{ (ecocase$ | async).usage }}
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">Organization</div>
+            <div class="panel-body">
+              Le propriétaire forestier met à disposition sa forêt.  Le forestier travaille dans le respect de l’écosystème (prélèvements parcimonieux du bois, recherche de diversité des essences). Il dispose de facilités financières grâce à l’engagement des consommateurs.
+              {{ (ecocase$ | async).organization }}
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">Economic Transaction</div>
+            <div class="panel-body">
+              80 euros/stère pour une exploitation locale et raisonnée au lieu de 65 euros/stère
+              {{ (ecocase$ | async).economic_transaction }}
+            </div>
+          </div>
+        </div> -->
+        
+      </div>
+      <!-- <div class="row">
+        <div class="col-md-6 evaluation-div">
+          <div class="panel panel-default">
+            <div class="panel-heading">Evaluation</div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-8">Reference</div>
+                <div class="col-md-4">{{ (ecocase$ | async).reference }}</div>
+              </div>
+              <div class="row">
+                <div class="col-md-8">Direct environmental gain</div>
+                <div class="col-md-4">{{ (ecocase$ | async).direct_environmental_gain }}</div>
+              </div>
+              <div class="row">
+                <div class="col-md-8">Indirect environmental gain</div>
+                <div class="col-md-4">{{ (ecocase$ | async).indirect_environmental_gain }}</div>
+              </div>
+              <div class="row">
+                <div class="col-md-8">Provent cas or projet/ Price</div>
+                <div class="col-md-4">{{ (ecocase$ | async).proven_cas_or_project }}</div>
+              </div>
+              <div class="row">
+                <div class="col-md-8">Attractiveness/ Price</div>
+                <div class="col-md-4">{{ (ecocase$ | async).attractiveness_price }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 evaluation-div">
+          <div class="panel panel-default">
+            <div class="panel-heading">Revelant mechanisms</div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-6">Main route</div>
+                <div class="col-md-6">{{ (ecocase$ | async).reference }}</div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">Secondary route</div>
+                <div class="col-md-6">{{ (ecocase$ | async).direct_environmental_gain }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <hr>
+
+      <div class="row">
+        <div class="col-md-4 evaluation-div">
+          <div class="panel panel-default">        
+            <div class="panel-heading">Categories</div>
+            <div class="panel-body">
+              <ul>
+                <li>Energie</li>
+                <li>Se loger</li>
+              </ul>
+            </div>
+          </div>      
+        </div>
+        <div class="col-md-4 evaluation-div">
+          <div class="panel panel-default">        
+            <div class="panel-heading">Level</div>
+            <div class="panel-body">
+              <ul>
+                <li>Business Model</li>
+              </ul>
+            </div>
+          </div>      
+        </div>
+        <div class="col-md-4 evaluation-div">
+          <div class="panel panel-default">        
+            <div class="panel-heading">Associated mechanisms</div>
+            <div class="panel-body">
+              <ul>
+                <li>Innover par les parties prenantes</li>
+              </ul>
+            </div>
+          </div>      
+        </div>
+      </div>
+
+      <!-- <div class="panel panel-default">
+        <div class="panel-heading pull-right">
+          <a href="{% url 'ecocases:upload_image' (ecocase$ | async).id %}">Upload more images?</a>
+        </div>
+      </div> -->
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <app-ecocase-comments [ecocaseId]="ecocaseId" width="200"></app-ecocase-comments>
+  </div>
+</div>

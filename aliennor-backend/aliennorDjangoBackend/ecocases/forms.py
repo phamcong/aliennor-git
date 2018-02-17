@@ -6,7 +6,7 @@ from django.contrib.admin import widgets
 from django.contrib.auth.models import User
 
 
-class EcoCaseForm(forms.ModelForm):
+class EcocaseForm(forms.ModelForm):
     title = forms.CharField(max_length=200)
 
     class Meta:
