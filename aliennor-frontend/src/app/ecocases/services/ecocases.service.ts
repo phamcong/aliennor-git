@@ -41,22 +41,51 @@ export class EcocasesService {
     return date.toDate();
   }
 
-  getTopEcocases(): any {
-    const url = `${config.api}/ecocases`;
+  getEcocases(filters: any): any {
+    let url = '';
+    if (filters.esms == undefined)
+      url = `${config.api}/ecocases/`;
+    else {
+        const params = [
+          `esms=${filters.esms.map(esm => (esm.checked) ? esm.title : '').join(',')}`,
+          `categories=${filters.categories.map(ctg => (ctg.checked) ? ctg.title : '').join(',')}`
+        ].join('&');
+      url = `${config.api}/ecocases/search/?${params}`;
+    }
+    console.log('ecocases.service getEcocases ===> url: ', url);
+    return this.http.get(url);
+  }
+
+  getUntaggedEcocases(ctgsFilters: any): any {
+    const params = [
+      `categories=${ctgsFilters.map(ctg => (ctg.checked) ? ctg.title : '').join(',')}`
+    ].join('&');
+    const url = `${config.api}/ecocases/untagged/search/?${params}`;
+    console.log('ecocases.service getUntaggedEcocases ===> url: ', url);
+    return this.http.get(url);
+  }
+
+
+  getESMsByEcocaseId(ecocaseId: string): Observable<any> {
+    const params = [
+      `user=${this.us.getOrSetUserName()}`,
+      `ecocaseId=${ecocaseId}`
+    ].join('&');
+
+    console.log('getESMsByEcocaseId, ddddddddddd', params);
+    const url = `${config.api}/ecocases/ecocase/${ecocaseId}/esms/?${params}`;
+    console.log('urlllll: ', url);
     return this.http.get(`${url}`).pipe(
       map(res => {
-        console.log('getTopEcocases res: ', res);
-        console.log('data is a property', res.hasOwnProperty('data'));
-        if (res.hasOwnProperty('data')) {
-          const obj = res['data'].ecocases;
-          console.log('objxxxxxxxx', obj);
-          console.log('converted object: ', Object.keys(obj).map(key => obj[key]));
-          return Object.keys(obj).map(key => obj[key])
-        } else {
-          return res;
-        }
+        console.log('esmmmmmmmmmmmmmmmm:', res);
       })
     );
+  }
+
+  getWeightESMsTaggedEcocase(ecocaseId: string): any {
+    const url = `${config.api}/ecocases/ecocase/tagged/${ecocaseId}/esms-weights`;
+    console.log('getWeightESMsByEcocase urlllll: ', url);
+    return this.http.get(`${url}`);
   }
 
   appliedFiltersEcocases(filters: any): any {
@@ -65,29 +94,25 @@ export class EcocasesService {
       `esms=${filters.esms.map(esm => (esm.checked) ? esm.title : '').join(',')}`,
       `categories=${filters.categories.map(ctg => (ctg.checked) ? ctg.title : '').join(',')}`
     ].join('&');
-    const url = `${config.api}/ecocases/?${params}`;
-    return this.http.get(url).pipe(
-      map(res => {
-        console.log('getTopEcocases res: ', res);
-        console.log('data is a property', res.hasOwnProperty('data'));
-        if (res.hasOwnProperty('data')) {
-          const obj = res['data'].ecocases;
-          return Object.keys(obj).map(key => obj[key])
-        } else {
-          return res;
-        }
-      })
-    );
+    const url = `${config.api}/ecocases/search/?${params}`;
+    return this.http.get(url);
   }
 
   getEcocaseDetails(id: string): Observable<any> {
-    const url = `${config.api}/ecocases/ecocase/${id}`;
+    const params = [
+      `username=${this.us.getOrSetUserName()}`
+    ].join('&');
+    const url = `${config.api}/ecocases/ecocase/${id}?${params}`;
+    console.log('getEcocaseDetails url: ', url);
 
     return this.http.get(url);
   }
 
-  getEcocasesInternalDetails(id: string): Observable<any> {
-    return this.http.get(`${config.api}/ecocases/ecocase/${id}/`)
+  getEcocaseInternalDetails(id: string): Observable<any> {
+    const params = [
+      `username=${this.us.getOrSetUserName()}`
+    ].join('&');
+    return this.http.get(`${config.api}/ecocases/ecocase/${id}?${params}`)
       .pipe(first());
   }
 
@@ -141,6 +166,13 @@ export class EcocasesService {
     return this.http.get(`${config.api}/ecocases/ecocase/${id}/comments/?${params}`)
   }
 
+  getAssociatedESMs(ecocaseId: string): Observable<any> {
+    const params = [
+      `username=${this.us.getOrSetUserName()}`
+    ].join('&');
+    return this.http.get(`${config.api}/ecocases/ecocase/${ecocaseId}/esms/summary?${params}`);
+  }
+
   postComment(ecocaseId: string, body: string): Observable<any> {
     const url = `${config.api}/ecocases/comment`;
     // check if user is logged in
@@ -170,28 +202,37 @@ export class EcocasesService {
     console.log('at getFilterCriteria');
     const url = `${config.api}/ecocases/filters`;
     const filters = {'esms': [], 'categories': []};
-    return this.http.get(`${url}`).pipe(
-      map(res => {
-        console.log('getFilterCriteria res: ', res);
-        if (res.hasOwnProperty('data')) {
-          this.filters.esms = res['data'].filter_criteria.esms.map(esm => {
-            return {
-              checked: true,
-              title: esm
-            };
-          });
-          this.filters.categories = res['data'].filter_criteria.categories.map(ctg => {
-            return {
-              checked: true,
-              title: ctg
-            };
-          });
-          return res['data'];
-        } else {
-          return res;
+    return this.http.get(`${url}`);
+  }
+
+  submitEsmevaluations(esmevaluations: any[], ecocaseId: string): Observable<any> {
+    const username = this.us.getOrSetUserName();
+    const url = `${config.api}/ecocases/ecocase/${ecocaseId}/esms/${username}/submit/`;
+    console.log('submitEsmevaluations - urllllllll: ', url);
+    /*return this.http.post(url, { esmevaluations }, { withCredentials: true });*/
+    return this.us.user$.pipe(
+      first(),
+      mergeMap(user => {
+          return this.http.post(url, { esmevaluations }, { withCredentials: true });
         }
-      })
-    );
+      ));
+  }
+
+  updateFilters(filters, count_results): any {
+    filters.esms.forEach(esm => {
+      esm.count_results = count_results.by_esms[esm.title];
+    });
+    filters.categories.forEach(ctg => {
+      ctg.count_results = count_results.by_ctgs[ctg.title];
+    });
+    return filters;
+  }
+
+  updateCtgsFilters(ctgsFilters, count_results_by_ctgs): any {
+    ctgsFilters.forEach(ctg => {
+      ctg.count_results = count_results_by_ctgs[ctg.title];
+    });
+    return ctgsFilters;
   }
 
   private getEcocasesSummary(ecocaseIds: string[], tmdbRes: any): Observable<{tmdb: any, api: any}> {

@@ -1,0 +1,67 @@
+<div class="container">
+  <div fxLayout="row">
+    <div fxFlex="100" fxFlex.gt-xs="40" fxFlex.gt-md="25">
+      <div class="panel panel-default">
+        <div class="panel-heading">FILTRES</div>
+        <div class="panel-body">
+          <div class="panel panel-default">
+            <div class="panel-heading">Mécanismes</div>
+            <div class="panel-body">
+              <div>
+                {{ esm.title }}
+                <label class="pull-right">{{ esm.count_results }}</label>
+                <div class="clearfix"></div>
+              </div>
+            </div>
+            <div class="panel-heading">Categories</div>
+            <div class="panel-body">
+              <div *ngFor="let ctg of filters.categories">
+                <input type="checkbox" name="category.id" [(ngModel)]="ctg.checked" class="margin-right">
+                {{ ctg.title }}
+                <label class="pull-right" *ngIf="ctg.checked">{{ ctg.count_results }}</label>
+                <div class="clearfix"></div>
+              </div>
+            </div>
+          </div>
+          <button mat-raised-button color='primary' class="fw" (click)="applyFilters(filters)">Apply</button>
+        </div>
+      </div>
+    </div>
+    <div fxFlex="100" fxFlex.gt-xs="60" fxFlex.gt-md="75">
+      <!--<div fxLayout="row" *ngIf="!ecocases$ | async">
+        <div class="text-center" fxFlex="100">
+          <app-loading-spinner [topMargin]="false" [backdrop]="false">Loading ecocases</app-loading-spinner>
+        </div>
+      </div>-->
+
+      <div fxLayout="row" fxLayoutAlign="center" fxLayoutWrap="wrap" fxLayoutGap="10px">
+        <mat-card
+          fxFlex="100"
+          fxFlex.gt-xs="49"
+          fxFlex.gt-md="30"
+          class="ecocase-card"
+          *ngFor="let ecocase of ecocases">
+          <div class="img-wrap">
+            <div class="image-container">
+              <img mat-card-image [src]="ecocase.image_urls[0]" (click)="getEcocaseDetails(ecocase)" class="representive-ecocase-image">
+            </div>
+          </div>
+          <mat-card-content>
+            <h3 mat-raised-button class="fw" (click)="getEcocaseDetails(ecocase)">{{ ecocase.title | truncate:[30, '...'] }}</h3>
+            <!--<p fxHide fxShow.gt-sm>{{ ecocase.overview }}</p>
+            <div fxLayout="row" class="specs">
+              <div fxFlex="50">
+                <i class="fa fa-2x fa-comments" aria-hidden="true"></i><br>
+                {{ ecocase.custom_data?.comment_count || 0 }}
+              </div>
+              <div fxFlex="50">
+                <i class="fa fa-2x fa-star" aria-hidden="true"></i><br>
+                {{ ecocase.custom_data?.avg_rating || 0 }}
+              </div>
+            </div>-->
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

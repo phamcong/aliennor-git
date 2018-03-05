@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { EcocasesService } from '../../services/ecocases.service';
 import { Router } from '@angular/router';
 import { async } from 'rxjs/scheduler/async';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -12,13 +13,17 @@ import { async } from 'rxjs/scheduler/async';
 })
 
 export class EcocasesComponent implements OnInit {
-  public topEcocases$: Observable<any>;
-  public filters$: Observable<any>;
+  public ecocases: any[];
   public esm_titles: any;
   public ecocasesSinceDate: Date | any;
   public spinnerStyles: any;
+  public filters$: Observable<any>;
   public filters: {
     esms: any[],
+    categories: any[]
+  };
+  public count_results: {
+    esms: any,
     categories: any[]
   };
 
@@ -28,16 +33,54 @@ export class EcocasesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.topEcocases$ = this.es.getTopEcocases();
-    console.log('ecocases.component, ecocases obtained from backend: ', this.topEcocases$);
-    this.ecocasesSinceDate = this.es.ecocasesFromDate();
+    // this.ecocases$ = this.es.getEcocases().pipe(
+    //   map(res => {
+    //     console.log('getTopEcocases res: ', res);
+    //     console.log('data is a property', res.hasOwnProperty('data'));
+    //     if (res.hasOwnProperty('data')) {
+    //       const obj = res['data'].ecocases;
+    //       console.log('objxxxxxxxx', obj);
+    //       console.log('converted object: ', Object.keys(obj).map(key => obj[key]));
+    //       return Object.keys(obj).map(key => obj[key])
+    //     } else {
+    //       return res;
+    //     }
+    //   })
+    // );
+    // console.log('ecocases.component, ecocases obtained from backend: ', this.topEcocases$);
+    // this.ecocasesSinceDate = this.es.ecocasesFromDate();
 
     // custom styles to fit loader to card container
     this.spinnerStyles = {
       margin: '-24px -24px 16px -24px'
     };
 
-    this.filters$ = this.es.getFilterCriteria();
+    this.es.getFilterCriteria()
+      .pipe(
+        map(res => {
+          console.log('getFilterCriteria res: ', res);
+          this.filters.esms = res['data'].filter_criteria.esms.map(esm => {
+            esm.checked = true;
+            return esm
+          });
+          this.filters.categories = res['data'].filter_criteria.categories.map(ctg => {
+            ctg.checked = true;
+            return ctg;
+          });
+          this.es.getEcocases(this.filters)
+            .pipe(
+              map(res => {
+                this.ecocases = res.data.ecocases;
+                this.filters = this.es.updateFilters(this.filters, res.data.count_results);
+                console.log('res: ', res);
+                console.log('filters', this.filters);
+              }))
+            .subscribe( data => {
+              console.log('data', data)
+            })
+        }))
+      .subscribe()
+    ;
     this.filters = this.es.filters;
 /*    this.filters = {esms: [], categories: []};
     this.filters.esms = this.es.filters.esms.map(esm => {
@@ -84,6 +127,13 @@ export class EcocasesComponent implements OnInit {
   applyFilters(filters: any): void {
     console.log('esm_titles: ', this.es.filters);
     console.log('filters: ', filters);
-    this.topEcocases$ = this.es.appliedFiltersEcocases(filters);
+    this.es.appliedFiltersEcocases(filters)
+      .pipe(
+        map(res => {
+          console.log('appliedFiltersEcocases: ', res.data.ecocases);
+          this.ecocases = res.data.ecocases;
+          this.filters = this.es.updateFilters(this.filters, res.data.count_results);
+        }))
+      .subscribe();
   }
 }

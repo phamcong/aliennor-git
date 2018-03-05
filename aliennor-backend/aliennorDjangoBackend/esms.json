@@ -1,0 +1,58 @@
+[
+	{
+		"id": "1",
+		"label": "stakeholders",
+		"title": "Innovate with stakeholders",
+		"logo_url": "https://image.ibb.co/mW94DH/logo_esm1.png",
+		"pdf_url": "https://www.dropbox.com/s/n05w1leam45uc99/esm1.pdf?dl=0",
+		"image_url": "https://image.ibb.co/n3FmAx/esm1.png"
+	},
+	{
+		"id": "2",
+		"label": "biomimicry",
+		"title": "Innovate through biomimicry",
+		"logo_url": "https://image.ibb.co/epyaLx/logo_esm2.png",
+		"pdf_url": "https://www.dropbox.com/s/3s67le79ekg6b7x/esm2.pdf?dl=0",
+		"image_url": "https://image.ibb.co/jZFxHc/esm2.png"
+	},
+	{
+		"id": "3",
+		"label": "consumption",
+		"title": "Innovate through sustainable mode of consumption",
+		"logo_url": "https://image.ibb.co/ixiLnc/logo_esm3.png",
+		"pdf_url": "https://www.dropbox.com/s/flh4eemf80iv0ev/esm3.pdf?dl=0",
+		"image_url": "https://image.ibb.co/c61RAx/esm3.png"
+	},
+	{
+		"id": "4",
+		"label": "product service systems",
+		"title": "Innovate through Product Service Systems",
+		"logo_url": "https://image.ibb.co/h3Ut7c/logo_esm4.png",
+		"pdf_url": "https://www.dropbox.com/s/hobshgk8vkpncdz/esm4.pdf?dl=0",
+		"image_url": "https://image.ibb.co/cjQ8OH/esm4.png"
+	},
+	{
+		"id": "5",
+		"label": "territorial resources",
+		"title": "Innovate through territorial resources",
+		"logo_url": "https://image.ibb.co/nio9fx/logo_esm5.png",
+		"pdf_url": "https://www.dropbox.com/s/n79u7e85z6w7dv9/esm5.pdf?dl=0",
+		"image_url": "https://image.ibb.co/mRHBcc/esm5.png"
+	},
+	{
+		"id": "6",
+		"label": "circularity",
+		"title": "Innovate through circularity",
+		"logo_url": "https://image.ibb.co/kDJmSc/logo_esm6.png",
+		"pdf_url": "https://www.dropbox.com/s/hye38yw0ldpnzjj/esm6.pdf?dl=0",
+		"image_url": "https://image.ibb.co/hTscHc/esm6.png"
+	},
+	{
+		"id": "7",
+		"label": "new technologies",
+		"title": "Innovate through new technologies",
+		"logo_url": "https://image.ibb.co/edE4DH/logo_esm7.png",
+		"pdf_url": "https://www.dropbox.com/s/cicgajr37eofqxe/esm7.pdf?dl=0",
+		"image_url": "https://image.ibb.co/jmnYqx/esm7.png"
+	}
+]

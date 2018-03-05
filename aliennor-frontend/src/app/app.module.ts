@@ -29,6 +29,8 @@ import { AsyncFormValidatorsService } from './auth/services/async-form-validator
 import { EcocaseDetailResolverService } from './ecocases/services/ecocase-detail-resolver.service';
 import { EcocasesService } from './ecocases/services/ecocases.service';
 import { RouterModule } from '@angular/router';
+import { EsmsModule } from './esms/esms.module';
+import { EsmsService } from './esms/services/esms.service';
 
 export function startServiceFactory(ss: StartupService): () => Promise<any> {
   return () => ss.load()
@@ -55,6 +57,7 @@ export function startServiceFactory(ss: StartupService): () => Promise<any> {
     AppRoutingModule,
     RouterModule,
     EcocasesModule,
+    EsmsModule,
     SharedModule,
     FlexLayoutModule
   ],
@@ -67,6 +70,7 @@ export function startServiceFactory(ss: StartupService): () => Promise<any> {
     StartupService,
     MessageService,
     EcocasesService,
+    EsmsService,
     EcocaseDetailResolverService,
     // service to get csrf token cookie from server before app initialization
     // otherwise each call to the django server will return a '403 Forbidden' error

@@ -13,7 +13,7 @@ import { MessageService } from '../../../shared/services/message.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup
+  loginForm: FormGroup;
 
   constructor(
    private fb: FormBuilder,
