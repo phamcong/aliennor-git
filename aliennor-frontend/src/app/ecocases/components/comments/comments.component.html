@@ -1,6 +1,6 @@
 <div class="detailBox">
   <div class="titleBox">
-    <label>Comment Box</label>
+    <label>Box de comments</label>
     <button type="button" class="close" aria-hidden="true">&times;</button>
   </div>
   <div class="actionBox">
@@ -28,7 +28,7 @@
       <div [fxFlex]="width*0.8" class="content">
         <mat-form-field class="fw">
             <textarea matInput formControlName="comment"
-                      [placeholder]="(us.user$ | async) ? 'Post comment (as '+(us.user$ | async).username + ')' : 'Post comment (as guest)'"></textarea>
+                      [placeholder]="(us.user$ | async) ? 'Postuler comment (comme '+(us.user$ | async).username + ')' : 'Postuler comment (comme  guest)'"></textarea>
         </mat-form-field>
       </div>
       <div [fxFlex]="width*0.2" class="content">

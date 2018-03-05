@@ -33,8 +33,10 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <button mat-button routerLink="welcome">ALIENNOR</button>
-    <button mat-button routerLink="ecocases">Ecocases</button>
-    <button mat-button routerLink="mechanisms">Mechanisms</button>
+    <button mat-button routerLink="ecocases">Cas d'innovation</button>
+    <button mat-button routerLink="untagged-ecocases">Cas non taggés</button>
+    <button mat-button routerLink="esms">Mécanismes</button>
+    <button mat-button routerLink="visualization">Visualisation</button>
 
     <span class="menu-space-filler"></span>
 
@@ -48,18 +50,18 @@
       <mat-menu #menuRef="matMenu">
         <button mat-menu-item (click)="goToEditProfile()">
           <mat-icon><i class="fa fa-pencil-square-o" aria-hidden="true"></i></mat-icon>
-          Update profile
+          Mettre à jour du profil
         </button>
         <button mat-menu-item (click)="logout($event)">
           <mat-icon><i class="fa fa-sign-out" aria-hidden="true"></i></mat-icon>
-          Logout
+          Déconnecter
         </button>
       </mat-menu>
     </span>
 
     <ng-template #notAuth>
-      <button mat-button routerLink="/user/register">Register</button>
-      <button mat-button routerLink="/user/login">Login</button>
+      <button mat-button routerLink="/user/register">S'inscrire</button>
+      <button mat-button routerLink="/user/login">S'indentifier</button>
     </ng-template>
   </mat-toolbar-row>
 </mat-toolbar>

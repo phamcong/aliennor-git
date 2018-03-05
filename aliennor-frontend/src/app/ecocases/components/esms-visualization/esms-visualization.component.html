@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Mécanismes
+      </div>
+      <div class="panel-body">
+        <div class="col col-sm-4">
+          <div class="esm-list">
+            <ul class="nav nav-pills nav-stacked">
+              <li *ngFor="let esm of esms; let idx = index">
+                <a data-toggle="pill" href="#esm{{idx}}">
+                  <span (click)="clickESM(esm)">{{ esm.title }}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="col col-sm-8">
+          <div style="height: 300px; bottom: 0px;" id="esmEcocasesGraph">
+            <div id="d3esmEcocasesGraph"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

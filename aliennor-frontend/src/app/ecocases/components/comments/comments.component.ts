@@ -24,7 +24,7 @@ export class CommentsComponent implements OnInit {
     itemsPerPage: number
   };
   commentForm: FormGroup;
-  postingComment: boolean = false;
+  postingComment = false;
   commentsPageNr$ = new BehaviorSubject<number>(1);
 
   constructor(

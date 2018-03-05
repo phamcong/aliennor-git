@@ -10,7 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { SharedRoutingModule } from './shared-routing.module';
-import { ValuesPipe } from './pipes/custommed-pipes.pipe';
+import { TruncatePipe, ValuesPipe } from './pipes/custommed-pipes.pipe';
 
 const COMPONENTS = [
   ErrorbarComponent,
@@ -35,11 +35,13 @@ const COMPONENTS = [
     ReactiveFormsModule,
     LoadingSpinnerComponent,
     NgxPaginationModule,
+    TruncatePipe,
     ...COMPONENTS
   ],
   declarations: [
     ...COMPONENTS,
-    WelcomeComponent
+    WelcomeComponent,
+    TruncatePipe
   ]
 })
 export class SharedModule { }

@@ -1,0 +1,84 @@
+<div class="panel panel-default">
+  <div class="panel-heading">Mécanismes associés</div>
+  <div class="panel-body">
+    <div *ngFor="let esmevaluation of esmevaluations; let idx = index">
+      <div id="accordion">
+        <div class="card">
+          <div class="card-header" id="heading{{idx}}">
+            <h5 class="mb-0">
+              <button class="btn btn-link" data-toggle="collapse" attr.data-target="#collapse{{idx}}" aria-expanded="true" attr.aria-controls="collapse{{idx}}">
+                {{ esmevaluation.esm.title}}
+              </button>
+            </h5>
+          </div>
+
+          <div id="collapse{{idx}}" class="collapse" attr.aria-labelledby="heading{{idx}}" data-parent="#accordion">
+            <div class="panel panel-default">
+              <div class="panel-heading">{{ esmevaluation.question.title }}</div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <textarea class="form-control" [(ngModel)]="esmevaluation.answer" placeholder="{{esmevaluation.answer}}"></textarea>
+                  <div ng-bind-html="esmevaluation.answer"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-6 evaluation-div">
+        <div class="panel panel-default">
+          Le mécanisme le plus associé
+          <div class="panel-body">
+            <select [(ngModel)]="firstESM">
+              <option *ngFor="let esmevaluation of esmevaluations" [ngValue]="esmevaluation.esm">{{esmevaluation.esm.title}}</option>
+            </select>
+            <br>
+            {{firstESM.title}}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 evaluation-div">
+        <div class="panel panel-default">
+          Le deuxième mécanisme le plus associé
+          <div class="panel-body">
+            <select [(ngModel)]="secondESM">
+              <option *ngFor="let esmevaluation of esmevaluations" [ngValue]="esmevaluation.esm" [disabled]="esmevaluation.esm === firstESM">{{esmevaluation.esm.title}}</option>
+            </select>
+            <br>
+            {{secondESM.title}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <button mat-raised-button color='primary' class="pull-right" (click)="submitEsmevaluations(esmevaluations)">Submit</button>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Sommaire</div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-6 evaluation-div">Mécanisme</div>
+      <div class="col-md-3 evaluation-div">Taggé comme 1er mécanisme</div>
+      <div class="col-md-3 evaluation-div">Taggé as 2nd mecanisme</div>
+    </div>
+    <div class="row" *ngFor="let associatedESM of associatedESMs">
+      <div class="col-md-6 evaluation-div">
+        {{associatedESM.title}}
+      </div>
+      <div class="col-md-3 evaluation-div">
+        par {{associatedESM.first_esm_count}} évaluateurs
+      </div>
+      <div class="col-md-3 evaluation-div">
+        par {{associatedESM.second_esm_count}} évaluateurs
+      </div>
+    </div>
+  </div>
+</div>

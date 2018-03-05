@@ -2,8 +2,10 @@ const isDev = true // process.env.NODE_ENV === 'development';
 const isLocal = true // process.env.SERVER_LOCATION === 'local'; // set via .env file
 
 const apiEndpoints = {
-  dev: 'http://localhost:8080/api',
-  prodLocal: 'http://localhost:8080',
+  dev: 'https://aliennor.herokuapp.com/api',
+  // dev: 'http://localhost:8080/api',
+  /*prodLocal: 'http://localhost:8080',*/
+  prodLocal: 'https://aliennor.herokuapp.com',
   prodOnline: 'https://glacial-shore-18891.herokuapp.com'
 };
 

@@ -6,6 +6,12 @@ import { EcocasePostComponent } from './components/ecocase-post/ecocase-post.com
 import { EcocasesRoutingModule } from './ecocases-routing.module';
 import { CommentsComponent } from './components/comments/comments.component';
 import { EcocaseDetailResolverService } from './services/ecocase-detail-resolver.service';
+import { AssociatedEsmsComponent } from './components/associated-esms/associated-esms.component';
+import { HtmlToPlaintextPipe, TruncatePipe } from '../shared/pipes/custommed-pipes.pipe';
+import { UntaggedEcocasesComponent } from './components/untagged-ecocases/untagged-ecocases.component';
+import { EcocasesVisualizationComponent } from './components/ecocases-visualization/ecocases-visualization.component';
+import { VisualizationComponent } from './components/visualization/visualization.component';
+import { EsmsVisualizationComponent } from './components/esms-visualization/esms-visualization.component';
 
 
 @NgModule({
@@ -17,7 +23,13 @@ import { EcocaseDetailResolverService } from './services/ecocase-detail-resolver
     EcocasesComponent,
     EcocaseDetailsComponent,
     EcocasePostComponent,
-    CommentsComponent
+    CommentsComponent,
+    AssociatedEsmsComponent,
+    HtmlToPlaintextPipe,
+    UntaggedEcocasesComponent,
+    VisualizationComponent,
+    EcocasesVisualizationComponent,
+    EsmsVisualizationComponent
   ],
   providers: [
     EcocaseDetailResolverService
